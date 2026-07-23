@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layanan Informasi - Desa Kaligayam</title>
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+
+        /* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background:#f5f7fa;
+    color:#333;
+    line-height:1.6;
+}
+
+a{
+    text-decoration:none;
+}
+
+ul, ol{
+    list-style:none;
+}
+
+img{
+    max-width:100%;
+    display:block;
+}
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+}
+
+section{
+    padding:70px 0;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.section-title h2{
+    font-size:2.2rem;
+    color:#0d47a1;
+    position:relative;
+}
+
+.section-title h2::after{
+    content:'';
+    width:80px;
+    height:4px;
+    background:#0d6efd;
+    display:block;
+    margin:10px auto;
+    border-radius:20px;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    padding:15px 8%;
+    background:#0d6efd;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    z-index:1000;
+    box-shadow:0 3px 15px rgba(0,0,0,0.15);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo img{
+    width:45px;
+    height:45px;
+}
+
+.logo span{
+    color:white;
+    font-size:1.2rem;
+    font-weight:700;
+}
+
+.nav-menu{
+    display:flex;
+    gap:25px;
+}
+
+.nav-menu a{
+    color:white;
+    font-weight:500;
+    transition:0.3s;
+}
+
+.nav-menu a:hover{
+    color:#ffd54f;
+}
+
+.nav-menu a.active{
+    color:#ffd54f;
+}
+
+.hamburger{
+    display:none;
+    color:white;
+    font-size:1.5rem;
+    cursor:pointer;
+}
+
+.dropdown{
+    position:relative;
+}
+
+.dropdown-menu{
+    position:absolute;
+    top:100%;
+    left:0;
+    min-width:220px;
+    background:#ffffff;
+    border-radius:8px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.15);
+    display:none;
+    z-index:999;
+}
+
+.dropdown-menu li{
+    width:100%;
+}
+
+.dropdown-menu li a{
+    display:block;
+    padding:12px 15px;
+    color:#333;
+    transition:0.3s;
+}
+
+.dropdown-menu li a:hover{
+    background:#0d6efd;
+    color:#fff;
+}
+
+.dropdown-menu li a.active{
+    background:#0d6efd;
+    color:#fff;
+}
+
+.dropdown:hover .dropdown-menu{
+    display:block;
+}
+
+.dropdown-head{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+}
+
+.dropdown-toggle{
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:12px;
+    padding:4px 8px;
+}
+
+.dropdown-toggle i{
+    transition:0.3s;
+}
+
+.dropdown.show .dropdown-toggle i{
+    transform:rotate(180deg);
+}
+
+.dropdown.show .dropdown-menu{
+    display:block;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero-infografis{
+    padding-top:150px;
+    padding-bottom:60px;
+    background:linear-gradient(135deg,#0d47a1,#0d6efd);
+    color:#fff;
+    text-align:center;
+}
+
+.hero-infografis h1{
+    font-size:2.7rem;
+    margin-bottom:15px;
+}
+
+.hero-infografis p{
+    max-width:750px;
+    margin:auto;
+    color:rgba(255,255,255,.9);
+    font-size:1.05rem;
+}
+
+.tab-nav{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:30px;
+}
+
+.tab-nav a{
+    background:rgba(255,255,255,.15);
+    color:#fff;
+    padding:8px 22px;
+    border-radius:30px;
+    border:1px solid rgba(255,255,255,.25);
+    transition:.3s;
+    font-weight:500;
+    font-size:.9rem;
+}
+
+.tab-nav a:hover,
+.tab-nav a.active{
+    background:#ffc107;
+    color:#333;
+    border-color:#ffc107;
+}
+
+/* =========================
+   LAYANAN SECTION
+========================= */
+
+.layanan-section{
+    border-bottom:1px solid #e6e9ee;
+}
+
+.layanan-section:nth-child(even){
+    background:#eef3fb;
+}
+
+.layanan-header{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+    margin-bottom:35px;
+}
+
+.layanan-icon{
+    width:60px;
+    height:60px;
+    background:#0d6efd;
+    color:#fff;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1.5rem;
+    flex-shrink:0;
+}
+
+.layanan-header h2{
+    font-size:2rem;
+    color:#0d47a1;
+}
+
+.layanan-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+    margin-bottom:25px;
+}
+
+.layanan-card{
+    background:#fff;
+    padding:28px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.layanan-card h3{
+    color:#0d47a1;
+    margin-bottom:16px;
+    font-size:1.15rem;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.syarat-list li{
+    padding:8px 0;
+    border-bottom:1px dashed #eee;
+    color:#444;
+    display:flex;
+    gap:8px;
+    align-items:flex-start;
+}
+
+.syarat-list li:last-child{
+    border-bottom:none;
+}
+
+.syarat-list li i{
+    color:#198754;
+    margin-top:4px;
+}
+
+.prosedur-list{
+    counter-reset:step;
+}
+
+.prosedur-list li{
+    counter-increment:step;
+    padding:10px 0 10px 40px;
+    position:relative;
+    border-bottom:1px dashed #eee;
+    color:#444;
+}
+
+.prosedur-list li:last-child{
+    border-bottom:none;
+}
+
+.prosedur-list li::before{
+    content:counter(step);
+    position:absolute;
+    left:0;
+    top:8px;
+    width:26px;
+    height:26px;
+    background:#0d6efd;
+    color:#fff;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:.8rem;
+    font-weight:700;
+}
+
+/* =========================
+   KK - JENIS LAYANAN (kartu bernomor)
+========================= */
+
+.kk-jenis-list{
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+    margin-bottom:30px;
+}
+
+.kk-jenis-card{
+    background:#fff;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    display:flex;
+}
+
+.kk-jenis-number{
+    flex:0 0 90px;
+    background:#eef3fb;
+    color:#0d47a1;
+    font-size:2.3rem;
+    font-weight:800;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.kk-jenis-body{
+    flex:1;
+    padding:0;
+}
+
+.kk-jenis-title{
+    background:linear-gradient(90deg,#0d47a1,#0d6efd);
+    color:#fff;
+    padding:14px 22px;
+    font-weight:600;
+    font-size:1.05rem;
+}
+
+.kk-jenis-content{
+    padding:20px 24px 24px;
+}
+
+.kk-jenis-label{
+    color:#0d47a1;
+    font-weight:700;
+    font-size:.8rem;
+    letter-spacing:.5px;
+    margin:16px 0 6px;
+    text-transform:uppercase;
+}
+
+.kk-jenis-label:first-child{
+    margin-top:0;
+}
+
+.kk-jenis-sub{
+    color:#666;
+    font-size:.9rem;
+    margin-bottom:6px;
+}
+
+.kk-syarat-list{
+    list-style:none;
+}
+
+.kk-syarat-list li{
+    padding:4px 0 4px 18px;
+    position:relative;
+    color:#444;
+    font-size:.93rem;
+}
+
+.kk-syarat-list li::before{
+    content:'-';
+    position:absolute;
+    left:0;
+}
+
+.catatan-list{
+    list-style:none;
+    counter-reset:catatan;
+}
+
+.catatan-list li{
+    counter-increment:catatan;
+    padding:5px 0 5px 26px;
+    position:relative;
+    color:#444;
+    font-size:.93rem;
+}
+
+.catatan-list li::before{
+    content:counter(catatan, lower-alpha) '.';
+    position:absolute;
+    left:0;
+    font-weight:700;
+    color:#0d47a1;
+}
+
+.kk-jenis-content a{
+    color:#0d6efd;
+    text-decoration:underline;
+}
+
+.kk-subhead{
+    background:#6a2c8f;
+    color:#fff;
+    padding:9px 18px;
+    border-radius:8px;
+    font-weight:600;
+    font-size:.95rem;
+    margin:22px 0 12px;
+}
+
+.kk-subhead:first-child{
+    margin-top:0;
+}
+
+@media(max-width:600px){
+    .kk-jenis-card{
+        flex-direction:column;
+    }
+    .kk-jenis-number{
+        flex:none;
+        padding:10px;
+    }
+}
+
+/* =========================
+   NOTE BOX
+========================= */
+
+.note-box{
+    background:#fff8e1;
+    border:1px solid #ffe082;
+    color:#7a5c00;
+    padding:14px 20px;
+    border-radius:12px;
+    font-size:.9rem;
+    margin-bottom:25px;
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+}
+
+.note-box i{
+    color:#f9a825;
+    margin-top:2px;
+}
+
+/* =========================
+   BANTUAN / KONTAK BOX
+========================= */
+
+.bantuan-box{
+    background:#fff;
+    border-radius:18px;
+    padding:32px;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+    border-top:4px solid #0d6efd;
+}
+
+.bantuan-box h3{
+    color:#0d47a1;
+    font-size:1.2rem;
+    margin-bottom:8px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.bantuan-box > p{
+    color:#666;
+    margin-bottom:20px;
+}
+
+.kontak-cepat{
+    display:flex;
+    gap:15px;
+    margin-bottom:25px;
+    flex-wrap:wrap;
+}
+
+.btn-wa, .btn-email{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:12px 22px;
+    border-radius:30px;
+    font-weight:600;
+    color:#fff;
+    transition:.3s;
+}
+
+.btn-wa{
+    background:#25d366;
+}
+
+.btn-wa:hover{
+    background:#1eb757;
+}
+
+.btn-email{
+    background:#0d47a1;
+}
+
+.btn-email:hover{
+    background:#0a3980;
+}
+
+.layanan-form{
+    border-top:1px solid #eee;
+    padding-top:22px;
+}
+
+.form-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin-bottom:15px;
+}
+
+.layanan-form input,
+.layanan-form select,
+.layanan-form textarea{
+    width:100%;
+    padding:12px 15px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-family:inherit;
+    font-size:.95rem;
+    color:#333;
+}
+
+.layanan-form textarea{
+    width:100%;
+    margin-bottom:15px;
+    resize:vertical;
+}
+
+.layanan-form input:focus,
+.layanan-form select:focus,
+.layanan-form textarea:focus{
+    outline:none;
+    border-color:#0d6efd;
+}
+
+.btn-primary-form{
+    background:#0d6efd;
+    color:#fff;
+    border:none;
+    padding:12px 26px;
+    border-radius:10px;
+    font-weight:600;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    transition:.3s;
+}
+
+.btn-primary-form:hover{
+    background:#0b5ed7;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    background:#0b1f44;
+    color:white;
+    text-align:center;
+    padding:50px 20px;
+}
+.footer-content h3{margin-bottom:15px;}
+.footer-content p{margin-bottom:15px;}
+.social{margin:20px 0;}
+.social a{color:white;font-size:1.5rem;margin:0 10px;transition:0.3s;}
+.social a:hover{color:#ffc107;}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+    .layanan-grid{
+        grid-template-columns:1fr;
+    }
+    .form-row{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:768px){
+    .hero-infografis h1{
+        font-size:2rem;
+    }
+    .nav-menu{
+        display:none;
+        flex-direction:column;
+        position:absolute;
+        top:75px;
+        left:0;
+        width:100%;
+        background:#0d6efd;
+        padding:20px;
+        text-align:center;
+    }
+    .nav-menu.active{display:flex;}
+    .hamburger{
+        display:block;
+    }
+    .layanan-header{
+        flex-direction:column;
+        text-align:center;
+    }
+    .dropdown:hover .dropdown-menu{display:none;}
+    .dropdown-menu{position:static;width:100%;margin-top:10px;box-shadow:none;}
+    .dropdown.show .dropdown-menu{display:block;}
+}
+
+    </style>
+
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+<nav class="navbar">
+
+    <div class="logo">
+        <img src="./logo.png" alt="Logo Desa">
+        <span>KALIGAYAM</span>
+    </div>
+
+    <ul class="nav-menu">
+
+        <li><a href="index.html">Beranda</a></li>
+
+        <li><a href="profil-desa.html">Profil Desa</a></li>
+
+        <li><a href="infografis.html">Infografis</a></li>
+
+        <!-- MENU LAYANAN INFORMASI -->
+        <li class="dropdown">
+
+            <div class="dropdown-head">
+                <a href="layanan-informasi.html" class="active">Layanan Informasi</a>
+                <span class="dropdown-toggle"><i class="fas fa-chevron-down"></i></span>
+            </div>
+
+            <ul class="dropdown-menu">
+                <li><a href="layanan-informasi.html#kk">Kartu Keluarga</a></li>
+                <li><a href="layanan-informasi.html#ktp">KTP</a></li>
+                <li><a href="layanan-informasi.html#kia">KIA</a></li>
+                <li><a href="layanan-informasi.html#akta-kematian">Akta Kematian</a></li>
+                <li><a href="layanan-informasi.html#akta-lahir">Akta Lahir</a></li>
+                <li><a href="layanan-informasi.html#akta-cerai">Akta Cerai</a></li>
+                <li><a href="layanan-informasi.html#pernikahan">Pernikahan</a></li>
+            </ul>
+
+        </li>
+
+        <li><a href="berita.html">Berita</a></li>
+
+        <li><a href="index.html#contact">Kontak</a></li>
+
+    </ul>
+
+    <div class="hamburger">
+        <i class="fas fa-bars"></i>
+    </div>
+
+</nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero-infografis">
+        <div class="container">
+
+            <h1>Layanan Informasi</h1>
+
+            <p>
+                Panduan lengkap pengurusan dokumen kependudukan dan catatan sipil
+                di Desa Kaligayam, beserta kontak bantuan jika Anda mengalami kendala.
+            </p>
+
+            <div class="tab-nav">
+                <a href="#kk" class="active">Kartu Keluarga (KK)</a>
+                <a href="#ktp">Kartu Tanda Penduduk (KTP)</a>
+                <a href="#kia">Kartu Identitas Anak (KIA)</a>
+                <a href="#akta-kematian">Akta Kematian</a>
+                <a href="#akta-lahir">Akta Kelahiran</a>
+                <a href="#akta-cerai">Akta Cerai</a>
+                <a href="#pernikahan">Pernikahan</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- KARTU KELUARGA (KK) -->
+    <section id="kk" class="layanan-section">
+        <div class="container">
+
+            <div class="layanan-header">
+                <div class="layanan-icon"><i class="fas fa-people-roof"></i></div>
+                <h2>Kartu Keluarga (KK)</h2>
+            </div>
+
+            <div class="kk-jenis-list">
+
+                <div class="kk-jenis-card">
+                    <div class="kk-jenis-number">01</div>
+                    <div class="kk-jenis-body">
+                        <div class="kk-jenis-title">Penerbitan Kartu Keluarga (KK) Baru Karena Membentuk Keluarga Baru</div>
+                        <div class="kk-jenis-content">
+                            <p class="kk-jenis-label">Persyaratan</p>
+                            <p class="kk-jenis-sub">Foto Dokumen Asli :</p>
+                            <ul class="kk-syarat-list">
+                                <li>Buku nikah/kutipan akta perkawinan atau kutipan akta perceraian.</li>
+                            </ul>
+                            <p class="kk-jenis-label">Catatan</p>
+                            <ol class="catatan-list">
+                                <li>Layanan Melalui Aplikasi Klaten Sakura di <a href="https://sakura.dukcapil.klaten.go.id/" target="_blank">https://sakura.dukcapil.klaten.go.id/</a> menu kependudukan dan pencatatan sipil.</li>
+                                <li>Jika tidak dapat melampirkan kutipan akta perkawinan atau perceraian maka melampirkan foto SPTJM perkawinan/perceraian belum tercatat.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kk-jenis-card">
+                    <div class="kk-jenis-number">02</div>
+                    <div class="kk-jenis-body">
+                        <div class="kk-jenis-title">Penerbitan KK Baru Karena Penggantian Kepala Keluarga (Kematian Kepala Keluarga)</div>
+                        <div class="kk-jenis-content">
+                            <p class="kk-jenis-label">Persyaratan</p>
+                            <p class="kk-jenis-sub">Foto Dokumen Asli :</p>
+                            <ul class="kk-syarat-list">
+                                <li>Akta kematian dan KK lama.</li>
+                            </ul>
+                            <p class="kk-jenis-label">Catatan</p>
+                            <ol class="catatan-list">
+                                <li>Layanan Melalui Aplikasi WhatsApp Nomor 0821-3360-73XX.</li>
+                                <li>Dalam hal seluruh anggota keluarga masih berusia di bawah 17 tahun, maka diperlukan kepala keluarga yang telah dewasa.</li>
+                            </ol>
+                            <p class="kk-jenis-label">Maka Solusinya Adalah</p>
+                            <ul class="kk-syarat-list">
+                                <li>Diperlukan saudara yang bersedia pindah menjadi kepala keluarga di dalam keluarga ini; atau</li>
+                                <li>Anak-anak dimaksud numpang pada Kartu Keluarga saudaranya yang terdekat dengan membuat surat pernyataan bersedia menjadi wali.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kk-jenis-card">
+                    <div class="kk-jenis-number">03</div>
+                    <div class="kk-jenis-body">
+                        <div class="kk-jenis-title">Penerbitan KK Baru Karena Pisah KK Dalam 1 (Satu) Alamat</div>
+                        <div class="kk-jenis-content">
+                            <p class="kk-jenis-label">Persyaratan</p>
+                            <p class="kk-jenis-sub">Foto Dokumen Asli :</p>
+                            <ul class="kk-syarat-list">
+                                <li>KK lama;</li>
+                                <li>Berumur sekurang-kurangnya 17 (tujuh belas) tahun atau sudah kawin atau pernah kawin yang dibuktikan dengan kepemilikan KTP-el.</li>
+                            </ul>
+                            <p class="kk-jenis-label">Catatan</p>
+                            <ol class="catatan-list">
+                                <li>Penduduk melampirkan buku nikah atau akta perceraian (jika disebabkan pernikahan atau perceraian);</li>
+                                <li>Penduduk belum menikah dapat pisah KK dalam 1 (satu) alamat jika berumur sekurang-kurangnya 17 tahun.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kk-jenis-card">
+                    <div class="kk-jenis-number">04</div>
+                    <div class="kk-jenis-body">
+                        <div class="kk-jenis-title">Penerbitan KK Karena Perubahan Data</div>
+                        <div class="kk-jenis-content">
+                            <p class="kk-jenis-label">Persyaratan</p>
+                            <p class="kk-jenis-sub">Foto Dokumen Asli :</p>
+                            <ul class="kk-syarat-list">
+                                <li>KK lama;</li>
+                                <li>Surat keterangan/bukti perubahan Peristiwa Kependudukan (contoh: Paspor, SKPWNI) dan Peristiwa Penting.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kk-jenis-card">
+                    <div class="kk-jenis-number">05</div>
+                    <div class="kk-jenis-body">
+                        <div class="kk-jenis-title">Penerbitan KK Karena Hilang</div>
+                        <div class="kk-jenis-content">
+                            <p class="kk-jenis-label">Persyaratan</p>
+                            <p class="kk-jenis-sub">Foto Dokumen Asli :</p>
+                            <ul class="kk-syarat-list">
+                                <li>Surat keterangan hilang dari kepolisian/desa;</li>
+                                <li>KTP-el; dan</li>
+                                <li>Kartu izin tinggal tetap (untuk orang asing).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kk-jenis-card">
+                    <div class="kk-jenis-number">06</div>
+                    <div class="kk-jenis-body">
+                        <div class="kk-jenis-title">Penerbitan KK Karena Rusak</div>
+                        <div class="kk-jenis-content">
+                            <p class="kk-jenis-label">Persyaratan</p>
+                            <p class="kk-jenis-sub">Foto Dokumen Asli :</p>
+                            <ul class="kk-syarat-list">
+                                <li>KK yang rusak;</li>
+                                <li>KTP-el; dan</li>
+                                <li>Kartu izin tinggal tetap (untuk orang asing).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="note-box">
+                <i class="fas fa-circle-info"></i>
+                <span>Persyaratan dapat berubah sewaktu-waktu mengikuti ketentuan Dinas Kependudukan dan Catatan Sipil (Dukcapil). Silakan konfirmasi ke Kantor Desa untuk informasi terbaru.</span>
+            </div>
+
+            <div class="bantuan-box">
+                <h3><i class="fas fa-headset"></i> Butuh Bantuan Pengurusan Kartu Keluarga (KK)?</h3>
+                <p>Hubungi kami langsung, atau isi formulir di bawah ini dan kami akan menghubungkan Anda melalui WhatsApp atau Email.</p>
+
+                <div class="kontak-cepat">
+                    <a href="https://wa.me/628562927006?text=Kartu%20Keluarga%20(KK)" class="btn-wa" target="_blank">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="mailto:desakaligayamwediklaten@gmail.com?subject=Layanan%20Informasi%20-%20Kartu%20Keluarga%20(KK)" class="btn-email">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                </div>
+
+                <form class="layanan-form" onsubmit="kirimLayanan(event, this, 'Kartu Keluarga (KK)')">
+                    <div class="form-row">
+                        <input type="text" name="nama" placeholder="Nama Lengkap" required>
+                        <input type="text" name="kontak" placeholder="No. WhatsApp / Email" required>
+                    </div>
+                    <textarea name="pesan" placeholder="Tuliskan kendala atau pertanyaan Anda (opsional)" rows="3"></textarea>
+                    <div class="form-row">
+                        <select name="metode">
+                            <option value="wa">Hubungi via WhatsApp</option>
+                            <option value="email">Hubungi via Email</option>
+                        </select>
+                        <button type="submit" class="btn-primary-form"><i class="fas fa-paper-plane"></i> Kirim & Hubungi</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- KARTU TANDA PENDUDUK (KTP) -->
+    <section id="ktp" class="layanan-section">
+        <div class="container">
+
+            <div class="layanan-header">
+                <div class="layanan-icon"><i class="fas fa-id-card"></i></div>
+                <h2>Kartu Tanda Penduduk (KTP)</h2>
+            </div>
+
+            <div class="kk-jenis-list">
+
+                <div class="kk-jenis-card">
+                    <div class="kk-jenis-number">01</div>
+                    <div class="kk-jenis-body">
+                        <div class="kk-jenis-title">Penerbitan KTP-el Baru</div>
+                        <div class="kk-jenis-content">
+                            <p class="kk-jenis-label">Persyaratan</p>
+                            <p class="kk-jenis-sub">Foto Dokumen Asli :</p>
+                            <ul class="kk-syarat-list">
+                                <li>Telah berusia 17 tahun, sudah kawin, atau pernah kawin;</li>
+                                <li>KK</li>
+                            </ul>
+                            <p class="kk-jenis-label">Catatan</p>
+                            <p class="kk-jenis-sub">Layanan Melalui Aplikasi Sakura di <a href="https://sakura.dukcapil.klaten.go.id/" target="_blank">https://sakura.dukcapil.klaten.go.id/</a> menu kependudukan dan pencatatan sipil.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kk-jenis-card">
+                    <div class="kk-jenis-number">02</div>
+                    <div class="kk-jenis-body">
+                        <div class="kk-jenis-title">Penerbitan KTP-el Baru Karena Pindah</div>
+                        <div class="kk-jenis-content">
+                            <p class="kk-jenis-label">Persyaratan</p>
+                            <p class="kk-jenis-sub">Foto Dokumen Asli :</p>
+                            <ul class="kk-syarat-list">
+                                <li>SKP (jika terjadi pindah datang);</li>
+                                <li>KTP-el lama;</li>
+                                <li>KK</li>
+                            </ul>
+                            <p class="kk-jenis-label">Catatan</p>
+                            <ol class="catatan-list">
+                                <li>Layanan Melalui Aplikasi Sakura di <a href="https://sakura.dukcapil.klaten.go.id/" target="_blank">https://sakura.dukcapil.klaten.go.id/</a> menu kependudukan dan pencatatan sipil.</li>
+                                <li>Jika akan sekaligus melakukan perubahan data: melampirkan surat keterangan/bukti perubahan Peristiwa Kependudukan dan Peristiwa Penting yang terkait.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kk-jenis-card">
+                    <div class="kk-jenis-number">03</div>
+                    <div class="kk-jenis-body">
+                        <div class="kk-jenis-title">Penerbitan KTP-el Baru Karena Perubahan Data</div>
+                        <div class="kk-jenis-content">
+                            <p class="kk-jenis-label">Persyaratan</p>
+                            <p class="kk-jenis-sub">Foto Dokumen Asli :</p>
+                            <ul class="kk-syarat-list">
+                                <li>KTP-el lama;</li>
+                                <li>KK;</li>
+                                <li>Surat keterangan/bukti perubahan Peristiwa Kependudukan dan Peristiwa Penting (jika terjadi perubahan data).</li>
+                            </ul>
+                            <p class="kk-jenis-label">Catatan</p>
+                            <p class="kk-jenis-sub">Layanan Melalui Aplikasi Sakura di <a href="https://sakura.dukcapil.klaten.go.id/" target="_blank">https://sakura.dukcapil.klaten.go.id/</a> menu kependudukan dan pencatatan sipil.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kk-jenis-card">
+                    <div class="kk-jenis-number">04</div>
+                    <div class="kk-jenis-body">
+                        <div class="kk-jenis-title">Penerbitan KTP-el Baru Karena Rusak</div>
+                        <div class="kk-jenis-content">
+                            <p class="kk-jenis-label">Persyaratan</p>
+                            <p class="kk-jenis-sub">Foto Dokumen Asli :</p>
+                            <ul class="kk-syarat-list">
+                                <li>KTP-el rusak</li>
+                            </ul>
+                            <p class="kk-jenis-label">Catatan</p>
+                            <ol class="catatan-list">
+                                <li>Layanan Melalui Aplikasi Sakura di <a href="https://sakura.dukcapil.klaten.go.id/" target="_blank">https://sakura.dukcapil.klaten.go.id/</a> menu kependudukan dan pencatatan sipil.</li>
+                                <li>
+                                    Apabila sekaligus hendak mengupdate data, lampirkan:
+                                    <ul class="kk-syarat-list">
+                                        <li>Tingkat Pendidikan: foto ijazah asli terakhir.</li>
+                                        <li>Status Perkawinan: foto Akte Nikah/Akte Cerai/Akte Kematian asli (kepala keluarga/anggota yang sudah menikah/cerai hidup/cerai mati).</li>
+                                        <li>Golongan Darah: Surat Keterangan Golongan Darah.</li>
+                                    </ul>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kk-jenis-card">
+                    <div class="kk-jenis-number">05</div>
+                    <div class="kk-jenis-body">
+                        <div class="kk-jenis-title">Penerbitan KTP-el Baru Karena Hilang</div>
+                        <div class="kk-jenis-content">
+                            <p class="kk-jenis-label">Persyaratan</p>
+                            <p class="kk-jenis-sub">Foto Dokumen Asli :</p>
+                            <ul class="kk-syarat-list">
+                                <li>Surat Keterangan Kehilangan dari Kepolisian;</li>
+                                <li>Kartu Keluarga.</li>
+                            </ul>
+                            <p class="kk-jenis-label">Catatan</p>
+                            <p class="kk-jenis-sub">Layanan Melalui Aplikasi Sakura di <a href="https://sakura.dukcapil.klaten.go.id/" target="_blank">https://sakura.dukcapil.klaten.go.id/</a> menu kependudukan dan pencatatan sipil.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="note-box">
+                <i class="fas fa-circle-info"></i>
+                <span>Persyaratan dapat berubah sewaktu-waktu mengikuti ketentuan Dinas Kependudukan dan Catatan Sipil (Dukcapil). Silakan konfirmasi ke Kantor Desa untuk informasi terbaru.</span>
+            </div>
+
+            <div class="bantuan-box">
+                <h3><i class="fas fa-headset"></i> Butuh Bantuan Pengurusan Kartu Tanda Penduduk (KTP)?</h3>
+                <p>Hubungi kami langsung, atau isi formulir di bawah ini dan kami akan menghubungkan Anda melalui WhatsApp atau Email.</p>
+
+                <div class="kontak-cepat">
+                    <a href="https://wa.me/628562927006?text=Kartu%20Tanda%20Penduduk%20(KTP)" class="btn-wa" target="_blank">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="mailto:desakaligayamwediklaten@gmail.com?subject=Layanan%20Informasi%20-%20Kartu%20Tanda%20Penduduk%20(KTP)" class="btn-email">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                </div>
+
+                <form class="layanan-form" onsubmit="kirimLayanan(event, this, 'Kartu Tanda Penduduk (KTP)')">
+                    <div class="form-row">
+                        <input type="text" name="nama" placeholder="Nama Lengkap" required>
+                        <input type="text" name="kontak" placeholder="No. WhatsApp / Email" required>
+                    </div>
+                    <textarea name="pesan" placeholder="Tuliskan kendala atau pertanyaan Anda (opsional)" rows="3"></textarea>
+                    <div class="form-row">
+                        <select name="metode">
+                            <option value="wa">Hubungi via WhatsApp</option>
+                            <option value="email">Hubungi via Email</option>
+                        </select>
+                        <button type="submit" class="btn-primary-form"><i class="fas fa-paper-plane"></i> Kirim & Hubungi</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- KARTU IDENTITAS ANAK (KIA) -->
+    <section id="kia" class="layanan-section">
+        <div class="container">
+
+            <div class="layanan-header">
+                <div class="layanan-icon"><i class="fas fa-child"></i></div>
+                <h2>Kartu Identitas Anak (KIA)</h2>
+            </div>
+
+            <div class="kk-jenis-list">
+
+                <div class="kk-jenis-card">
+                    <div class="kk-jenis-number">01</div>
+                    <div class="kk-jenis-body">
+                        <div class="kk-jenis-title">Penerbitan Kartu Identitas Anak Baru</div>
+                        <div class="kk-jenis-content">
+                            <p class="kk-jenis-label">Persyaratan</p>
+                            <p class="kk-jenis-sub">Foto Dokumen Asli :</p>
+                            <ul class="kk-syarat-list">
+                                <li>Foto akta kelahiran;</li>
+                                <li>KK orang tua/wali;</li>
+                                <li>KTP-el kedua orang tua/wali untuk anak usia 0-5 tahun kurang 1 hari;</li>
+                                <li>Foto anak berwarna ukuran 2x3 sebanyak 2 (dua) lembar untuk anak usia 5-17 tahun kurang 1 (satu) hari.</li>
+                            </ul>
+                            <p class="kk-jenis-label">Catatan</p>
+                            <p class="kk-jenis-sub">Layanan Melalui Aplikasi Sakura di <a href="https://sakura.dukcapil.klaten.go.id/" target="_blank">https://sakura.dukcapil.klaten.go.id/</a> menu kependudukan dan catatan sipil.</p>
+                            <ol class="catatan-list">
+                                <li>Masa berlaku KIA baru untuk anak kurang dari 5 tahun adalah sampai anak berusia 5 tahun.</li>
+                                <li>Masa berlaku KIA untuk anak 5 tahun adalah sampai anak berusia 17 tahun kurang satu hari.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kk-jenis-card">
+                    <div class="kk-jenis-number">02</div>
+                    <div class="kk-jenis-body">
+                        <div class="kk-jenis-title">Penerbitan Kartu Identitas Anak Karena Hilang</div>
+                        <div class="kk-jenis-content">
+                            <p class="kk-jenis-label">Persyaratan</p>
+                            <p class="kk-jenis-sub">Foto Dokumen Asli :</p>
+                            <ul class="kk-syarat-list">
+                                <li>KTP-el yang rusak;</li>
+                                <li>Kartu Keluarga;</li>
+                                <li>Surat kehilangan dari kepolisian.</li>
+                            </ul>
+                            <p class="kk-jenis-label">Catatan</p>
+                            <p class="kk-jenis-sub">Layanan Melalui Aplikasi Sakura di <a href="https://sakura.dukcapil.klaten.go.id/" target="_blank">https://sakura.dukcapil.klaten.go.id/</a> menu kependudukan dan pencatatan sipil.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kk-jenis-card">
+                    <div class="kk-jenis-number">03</div>
+                    <div class="kk-jenis-body">
+                        <div class="kk-jenis-title">Penerbitan Kartu Identitas Anak Karena Rusak</div>
+                        <div class="kk-jenis-content">
+                            <p class="kk-jenis-label">Persyaratan</p>
+                            <p class="kk-jenis-sub">Foto Dokumen Asli :</p>
+                            <ul class="kk-syarat-list">
+                                <li>KTP-el yang rusak;</li>
+                                <li>Kartu Keluarga.</li>
+                            </ul>
+                            <p class="kk-jenis-label">Catatan</p>
+                            <p class="kk-jenis-sub">Layanan Melalui Aplikasi Sakura di <a href="https://sakura.dukcapil.klaten.go.id/" target="_blank">https://sakura.dukcapil.klaten.go.id/</a> menu kependudukan dan pencatatan sipil.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="note-box">
+                <i class="fas fa-circle-info"></i>
+                <span>Persyaratan dapat berubah sewaktu-waktu mengikuti ketentuan Dinas Kependudukan dan Catatan Sipil (Dukcapil). Silakan konfirmasi ke Kantor Desa untuk informasi terbaru.</span>
+            </div>
+
+            <div class="bantuan-box">
+                <h3><i class="fas fa-headset"></i> Butuh Bantuan Pengurusan Kartu Identitas Anak (KIA)?</h3>
+                <p>Hubungi kami langsung, atau isi formulir di bawah ini dan kami akan menghubungkan Anda melalui WhatsApp atau Email.</p>
+
+                <div class="kontak-cepat">
+                    <a href="https://wa.me/628562927006?text=Kartu%20Identitas%20Anak%20(KIA)" class="btn-wa" target="_blank">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="mailto:desakaligayamwediklaten@gmail.com?subject=Layanan%20Informasi%20-%20Kartu%20Identitas%20Anak%20(KIA)" class="btn-email">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                </div>
+
+                <form class="layanan-form" onsubmit="kirimLayanan(event, this, 'Kartu Identitas Anak (KIA)')">
+                    <div class="form-row">
+                        <input type="text" name="nama" placeholder="Nama Lengkap" required>
+                        <input type="text" name="kontak" placeholder="No. WhatsApp / Email" required>
+                    </div>
+                    <textarea name="pesan" placeholder="Tuliskan kendala atau pertanyaan Anda (opsional)" rows="3"></textarea>
+                    <div class="form-row">
+                        <select name="metode">
+                            <option value="wa">Hubungi via WhatsApp</option>
+                            <option value="email">Hubungi via Email</option>
+                        </select>
+                        <button type="submit" class="btn-primary-form"><i class="fas fa-paper-plane"></i> Kirim & Hubungi</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- AKTA KEMATIAN -->
+    <section id="akta-kematian" class="layanan-section">
+        <div class="container">
+
+            <div class="layanan-header">
+                <div class="layanan-icon"><i class="fas fa-heart-crack"></i></div>
+                <h2>Akta Kematian</h2>
+            </div>
+
+            <div class="kk-jenis-list">
+
+                <div class="kk-jenis-card">
+                    <div class="kk-jenis-body">
+                        <div class="kk-jenis-title">Penerbitan Akta Kematian</div>
+                        <div class="kk-jenis-content">
+                            <p class="kk-jenis-label">Persyaratan</p>
+                            <ol class="catatan-list">
+                                <li>Fotokopi surat kematian dari dokter atau kepala desa/lurah atau yang disebut dengan nama lain, atau surat keterangan kepolisian bagi kematian seseorang yang tidak jelas identitasnya, atau salinan penetapan pengadilan bagi seseorang yang tidak jelas keberadaannya karena hilang atau mati tetapi tidak ditemukan jenazahnya, atau surat pernyataan kematian dari maskapai penerbangan bagi seseorang yang tidak jelas keberadaannya karena hilang atau mati tetapi tidak ditemukan jenazahnya sesuai dengan ketentuan peraturan perundang-undangan, atau surat keterangan kematian dari Perwakilan RI bagi penduduk yang kematiannya di luar wilayah NKRI;</li>
+                                <li>Fotokopi Dokumen Perjalanan Republik Indonesia bagi WNI bukan Penduduk atau Fotokopi Dokumen Perjalanan bagi OA;</li>
+                                <li>Fotokopi KK/KTP yang meninggal dunia.</li>
+                            </ol>
+                            <p class="kk-jenis-label">Penjelasan</p>
+                            <ol class="catatan-list">
+                                <li>WNI mengisi F-2.01.</li>
+                                <li>OA mengisi formulir F-2.01.</li>
+                                <li>Untuk pelayanan secara offline/tatap muka, persyaratan surat kematian yang diserahkan berupa fotokopi bukan asli (asli hanya diperlihatkan).</li>
+                                <li>Dinas tidak menarik surat kematian asli.</li>
+                                <li>WNI melampirkan fotokopi KK untuk verifikasi data yang tercantum dalam formulir F-2.01.</li>
+                                <li>Untuk pelayanan online/daring, persyaratan yang discan/difoto untuk diunggah harus aslinya.</li>
+                                <li>WNI dan OA tidak perlu melampirkan fotokopi KTP-el saksi, karena identitasnya sudah tercantum dalam formulir F-2.01.</li>
+                                <li>OA menyerahkan fotokopi Dokumen Perjalanan atau fotokopi ITAS/SKTT atau fotokopi ITAP/KTP-el.</li>
+                                <li>WNI bukan penduduk menyerahkan fotokopi dokumen perjalanan RI yang meninggal dunia.</li>
+                                <li>Pencatatan Kematian dilaporkan tidak hanya oleh anak atau ahli waris tetapi dapat juga dilaporkan oleh keluarga lainnya, termasuk ketua RT.</li>
+                                <li>Dalam hal subjek akta tidak tercantum dalam KK dan database kependudukan, kutipan akta kematian diterbitkan tanpa NIK.</li>
+                                <li>Dinas menerbitkan kutipan akta kematian.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="note-box">
+                <i class="fas fa-circle-info"></i>
+                <span>Persyaratan dapat berubah sewaktu-waktu mengikuti ketentuan Dinas Kependudukan dan Catatan Sipil (Dukcapil). Silakan konfirmasi ke Kantor Desa untuk informasi terbaru.</span>
+            </div>
+
+            <div class="bantuan-box">
+                <h3><i class="fas fa-headset"></i> Butuh Bantuan Pengurusan Akta Kematian?</h3>
+                <p>Hubungi kami langsung, atau isi formulir di bawah ini dan kami akan menghubungkan Anda melalui WhatsApp atau Email.</p>
+
+                <div class="kontak-cepat">
+                    <a href="https://wa.me/628562927006?text=Akta%20Kematian" class="btn-wa" target="_blank">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="mailto:desakaligayamwediklaten@gmail.com?subject=Layanan%20Informasi%20-%20Akta%20Kematian" class="btn-email">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                </div>
+
+                <form class="layanan-form" onsubmit="kirimLayanan(event, this, 'Akta Kematian')">
+                    <div class="form-row">
+                        <input type="text" name="nama" placeholder="Nama Lengkap" required>
+                        <input type="text" name="kontak" placeholder="No. WhatsApp / Email" required>
+                    </div>
+                    <textarea name="pesan" placeholder="Tuliskan kendala atau pertanyaan Anda (opsional)" rows="3"></textarea>
+                    <div class="form-row">
+                        <select name="metode">
+                            <option value="wa">Hubungi via WhatsApp</option>
+                            <option value="email">Hubungi via Email</option>
+                        </select>
+                        <button type="submit" class="btn-primary-form"><i class="fas fa-paper-plane"></i> Kirim & Hubungi</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- AKTA KELAHIRAN -->
+    <section id="akta-lahir" class="layanan-section">
+        <div class="container">
+
+            <div class="layanan-header">
+                <div class="layanan-icon"><i class="fas fa-baby"></i></div>
+                <h2>Akta Kelahiran</h2>
+            </div>
+
+            <div class="kk-jenis-list">
+
+                <div class="kk-jenis-card">
+                    <div class="kk-jenis-body">
+                        <div class="kk-jenis-title">Penerbitan Akta Kelahiran</div>
+                        <div class="kk-jenis-content">
+                            <p class="kk-jenis-label">Persyaratan</p>
+                            <ol class="catatan-list">
+                                <li>Fotokopi surat keterangan kelahiran yaitu dari rumah sakit/Puskesmas;</li>
+                                <li>Fotokopi buku nikah/kutipan akta perkawinan/bukti lain yang sah;</li>
+                                <li>Fotokopi KK dimana penduduk terdaftar atau akan didaftarkan sebagai anggota keluarga;</li>
+                                <li>Berita acara dari kepolisian bagi anak yang tidak diketahui asal usulnya/keberadaan orang tuanya.</li>
+                                <li>Penduduk dapat membuat SPTJM kebenaran data kelahiran dengan mengisi F-2.03 dan 2 (dua) orang saksi, jika tidak memenuhi persyaratan sebagaimana huruf a.</li>
+                                <li>Penduduk dapat membuat SPTJM kebenaran sebagai pasangan suami istri dengan mengisi F-2.04 dan 2 (dua) orang saksi, jika tidak memenuhi persyaratan sebagaimana huruf b.</li>
+                            </ol>
+                            <p class="kk-jenis-label">Penjelasan</p>
+                            <ol class="catatan-list">
+                                <li>WNI mengisi formulir F-2.01.</li>
+                                <li>Untuk pelayanan secara offline/tatap muka, persyaratan surat keterangan kelahiran yang diserahkan berupa fotokopi bukan asli (asli hanya diperlihatkan).</li>
+                                <li>Dinas tidak menarik surat keterangan kelahiran asli.</li>
+                                <li>Untuk pelayanan online/daring, persyaratan yang discan/difoto untuk diunggah harus aslinya.</li>
+                                <li>WNI melampirkan fotokopi KK untuk verifikasi data yang tercantum dalam formulir F-2.01.</li>
+                                <li>WNI tidak perlu melampirkan fotokopi KTP-el saksi, karena identitas saksi sudah tercantum dalam formulir F-2.01.</li>
+                                <li>Dinas menerbitkan kutipan akta kelahiran.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="note-box">
+                <i class="fas fa-circle-info"></i>
+                <span>Persyaratan dapat berubah sewaktu-waktu mengikuti ketentuan Dinas Kependudukan dan Catatan Sipil (Dukcapil). Silakan konfirmasi ke Kantor Desa untuk informasi terbaru.</span>
+            </div>
+
+            <div class="bantuan-box">
+                <h3><i class="fas fa-headset"></i> Butuh Bantuan Pengurusan Akta Kelahiran?</h3>
+                <p>Hubungi kami langsung, atau isi formulir di bawah ini dan kami akan menghubungkan Anda melalui WhatsApp atau Email.</p>
+
+                <div class="kontak-cepat">
+                    <a href="https://wa.me/628562927006?text=Akta%20Kelahiran" class="btn-wa" target="_blank">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="mailto:desakaligayamwediklaten@gmail.com?subject=Layanan%20Informasi%20-%20Akta%20Kelahiran" class="btn-email">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                </div>
+
+                <form class="layanan-form" onsubmit="kirimLayanan(event, this, 'Akta Kelahiran')">
+                    <div class="form-row">
+                        <input type="text" name="nama" placeholder="Nama Lengkap" required>
+                        <input type="text" name="kontak" placeholder="No. WhatsApp / Email" required>
+                    </div>
+                    <textarea name="pesan" placeholder="Tuliskan kendala atau pertanyaan Anda (opsional)" rows="3"></textarea>
+                    <div class="form-row">
+                        <select name="metode">
+                            <option value="wa">Hubungi via WhatsApp</option>
+                            <option value="email">Hubungi via Email</option>
+                        </select>
+                        <button type="submit" class="btn-primary-form"><i class="fas fa-paper-plane"></i> Kirim & Hubungi</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- AKTA CERAI -->
+    <section id="akta-cerai" class="layanan-section">
+        <div class="container">
+
+            <div class="layanan-header">
+                <div class="layanan-icon"><i class="fas fa-heart-circle-minus"></i></div>
+                <h2>Akta Cerai</h2>
+            </div>
+
+            <div class="kk-jenis-list">
+
+                <div class="kk-jenis-card">
+                    <div class="kk-jenis-body">
+                        <div class="kk-jenis-title">Pencatatan Perceraian</div>
+                        <div class="kk-jenis-content">
+                            <p class="kk-jenis-label">Persyaratan</p>
+                            <ol class="catatan-list">
+                                <li>Fotokopi salinan putusan pengadilan yang telah mempunyai kekuatan hukum tetap;</li>
+                                <li>Kutipan akta perkawinan asli;</li>
+                                <li>KTP-el Asli; dan</li>
+                                <li>KK Asli.</li>
+                            </ol>
+                            <p class="kk-jenis-label">Penjelasan</p>
+                            <ol class="catatan-list">
+                                <li>WNI mengisi formulir F-2.01.</li>
+                                <li>Untuk pelayanan secara offline/tatap muka, persyaratan salinan putusan pengadilan yang telah mempunyai kekuatan hukum tetap yang diserahkan berupa fotokopi bukan asli (asli hanya diperlihatkan).</li>
+                                <li>Dinas tidak menarik salinan putusan asli.</li>
+                                <li>WNI melampirkan KK Asli untuk verifikasi data yang tercantum dalam formulir F-2.01 serta untuk dilakukan perubahan data (status perkawinan menjadi Cerai Hidup).</li>
+                                <li>Tidak perlu melampirkan fotokopi KTP-el 2 Saksi karena identitas saksi sudah tercantum dalam formulir F-2.01.</li>
+                                <li>Dinas menarik kutipan akta perkawinan asli, KK Asli, dan KTP-el Asli yang lama.</li>
+                                <li>Dinas memusnahkan KTP-el asli yang lama.</li>
+                                <li>Dalam hal pemohon tidak dapat menyerahkan kutipan akta perkawinan atau bukti pencatatan perkawinan, pemohon membuat surat pernyataan (SPTJM) yang menyatakan kutipan akta perkawinan tidak dimiliki dengan alasan sesuai dengan ketentuan peraturan perundang-undangan.</li>
+                                <li>Dinas menerbitkan Kutipan Akta Perceraian, KTP-el dan KK baru dengan status perkawinan yang sudah dimutakhirkan datanya.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="note-box">
+                <i class="fas fa-circle-info"></i>
+                <span>Persyaratan dapat berubah sewaktu-waktu mengikuti ketentuan Dinas Kependudukan dan Catatan Sipil (Dukcapil). Silakan konfirmasi ke Kantor Desa untuk informasi terbaru.</span>
+            </div>
+
+            <div class="bantuan-box">
+                <h3><i class="fas fa-headset"></i> Butuh Bantuan Pengurusan Akta Cerai?</h3>
+                <p>Hubungi kami langsung, atau isi formulir di bawah ini dan kami akan menghubungkan Anda melalui WhatsApp atau Email.</p>
+
+                <div class="kontak-cepat">
+                    <a href="https://wa.me/628562927006?text=Akta%20Cerai" class="btn-wa" target="_blank">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="mailto:desakaligayamwediklaten@gmail.com?subject=Layanan%20Informasi%20-%20Akta%20Cerai" class="btn-email">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                </div>
+
+                <form class="layanan-form" onsubmit="kirimLayanan(event, this, 'Akta Cerai')">
+                    <div class="form-row">
+                        <input type="text" name="nama" placeholder="Nama Lengkap" required>
+                        <input type="text" name="kontak" placeholder="No. WhatsApp / Email" required>
+                    </div>
+                    <textarea name="pesan" placeholder="Tuliskan kendala atau pertanyaan Anda (opsional)" rows="3"></textarea>
+                    <div class="form-row">
+                        <select name="metode">
+                            <option value="wa">Hubungi via WhatsApp</option>
+                            <option value="email">Hubungi via Email</option>
+                        </select>
+                        <button type="submit" class="btn-primary-form"><i class="fas fa-paper-plane"></i> Kirim & Hubungi</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PERNIKAHAN -->
+    <section id="pernikahan" class="layanan-section">
+        <div class="container">
+
+            <div class="layanan-header">
+                <div class="layanan-icon"><i class="fas fa-rings-wedding"></i></div>
+                <h2>Pernikahan</h2>
+            </div>
+
+            <div class="kk-jenis-list">
+
+                <div class="kk-jenis-card">
+                    <div class="kk-jenis-body">
+                        <div class="kk-jenis-title">Penerbitan Akta Perkawinan</div>
+                        <div class="kk-jenis-content">
+
+                            <p class="kk-subhead">Pencatatan Perkawinan WNI Dalam Wilayah NKRI</p>
+                            <p class="kk-jenis-label">Persyaratan</p>
+                            <ol class="catatan-list">
+                                <li>Fotokopi surat keterangan telah terjadinya perkawinan dari pemuka agama atau penghayat kepercayaan terhadap Tuhan Yang Maha Esa;</li>
+                                <li>Pas foto berwarna suami dan istri;</li>
+                                <li>KTP-el Asli;</li>
+                                <li>KK Asli;</li>
+                                <li>Bagi janda atau duda karena cerai mati melampirkan fotokopi akta kematian pasangannya; atau</li>
+                                <li>Bagi janda atau duda karena cerai hidup melampirkan fotokopi akta perceraian.</li>
+                            </ol>
+                            <p class="kk-jenis-label">Penjelasan</p>
+                            <ol class="catatan-list">
+                                <li>WNI mengisi formulir F-2.01.</li>
+                                <li>Untuk pelayanan secara offline/tatap muka, persyaratan surat keterangan perkawinan yang diserahkan berupa fotokopi bukan asli (asli hanya diperlihatkan).</li>
+                                <li>Dinas tidak menarik surat keterangan perkawinan asli.</li>
+                                <li>WNI melampirkan KK Asli untuk verifikasi data yang tercantum dalam formulir F-2.01 serta untuk dilakukan perubahan data (status kawin).</li>
+                                <li>WNI tidak perlu melampirkan fotokopi KTP-el 2 Saksi karena identitasnya sudah tercantum dalam formulir F-2.01.</li>
+                                <li>Ukuran Pasfoto 4x6 suami dan istri sebanyak 1 lembar.</li>
+                                <li>Dinas menerbitkan kutipan akta perkawinan, KTP-el dengan status Kawin dan KK yang sudah dimutakhirkan datanya.</li>
+                                <li>Dinas memusnahkan KTP-el asli yang lama.</li>
+                                <li>Apabila hasil verifikasi menunjukkan bahwa perkawinan berlangsung sebelum berusia 19 tahun, Dinas meminta fotokopi Penetapan Pengadilan tentang Dispensasi Perkawinan.</li>
+                                <li>Apabila hasil verifikasi menunjukkan bahwa suami melangsungkan perkawinan kedua dst, Dinas meminta fotokopi Penetapan Pengadilan tentang Izin Perkawinan dari istri sah.</li>
+                                <li>Dalam hal salah satu atau kedua suami istri meninggal dunia sebelum pencatatan perkawinan, pencatatan perkawinan dilaksanakan dengan memenuhi persyaratan berupa Surat Pernyataan Tanggung Jawab Mutlak Kebenaran Data sebagai Pasangan Suami Istri (Permendagri 108/2019 Pasal 50 ayat 2).</li>
+                                <li>Dalam hal pencatatan perkawinan bagi pasangan suami dan istri yang dalam KK status cerai hidup belum tercatat, dapat dilaksanakan dengan Surat Pernyataan Tanggung Jawab Mutlak Perceraian Belum Tercatat (Permendagri 108/2019 Pasal 50 ayat 4).</li>
+                                <li>Dalam hal pencatatan perkawinan Penghayat Kepercayaan terhadap Tuhan Yang Maha Esa, Surat keterangan telah terjadinya perkawinan dari pemuka penghayat kepercayaan terhadap Tuhan Yang Maha Esa dari organisasi yang terdaftar pada kementerian yang bidang tugasnya secara teknis membina organisasi penghayat kepercayaan terhadap Tuhan Yang Maha Esa (Pasal 39 PP 40/2019).</li>
+                            </ol>
+
+                            <p class="kk-subhead">Pencatatan Perkawinan OA Dalam Wilayah NKRI</p>
+                            <p class="kk-jenis-label">Persyaratan</p>
+                            <ol class="catatan-list">
+                                <li>Fotokopi surat keterangan telah terjadinya perkawinan dari pemuka agama atau penghayat kepercayaan terhadap Tuhan Yang Maha Esa;</li>
+                                <li>Pas foto berwarna suami dan istri;</li>
+                                <li>Fotokopi dokumen Perjalanan;</li>
+                                <li>Fotokopi surat keterangan tempat tinggal bagi pemegang izin tinggal terbatas;</li>
+                                <li>KTP-el Asli;</li>
+                                <li>KK Asli; dan</li>
+                                <li>Fotokopi izin perkawinan dari negara atau perwakilan negaranya.</li>
+                            </ol>
+                            <p class="kk-jenis-label">Penjelasan</p>
+                            <ol class="catatan-list">
+                                <li>OA mengisi formulir F-2.01.</li>
+                                <li>Untuk pelayanan secara offline/tatap muka, persyaratan surat keterangan perkawinan yang diserahkan berupa fotokopi bukan asli (asli hanya diperlihatkan).</li>
+                                <li>Dinas tidak menarik surat keterangan perkawinan asli.</li>
+                                <li>Untuk pelayanan online/daring, persyaratan yang discan/difoto untuk diunggah harus aslinya.</li>
+                                <li>Tidak perlu melampirkan fotokopi KTP-el 2 Saksi karena identitasnya sudah tercantum dalam formulir F-2.01.</li>
+                                <li>Ukuran Pasfoto 4x6 suami dan istri sebanyak 1 lembar.</li>
+                                <li>Dinas memusnahkan KTP-el asli yang lama.</li>
+                                <li>OA menyerahkan fotokopi Dokumen Perjalanan atau fotokopi ITAS/SKTT atau fotokopi ITAP/KK.</li>
+                                <li>Dinas menerbitkan Kutipan Akta Perkawinan, KTP-el dengan status Kawin dan KK yang sudah dimutakhirkan datanya.</li>
+                            </ol>
+
+                            <p class="kk-jenis-label">Catatan</p>
+                            <p class="kk-jenis-sub">Melampirkan Akta Kelahiran untuk melakukan verifikasi data.</p>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="note-box">
+                <i class="fas fa-circle-info"></i>
+                <span>Persyaratan dapat berubah sewaktu-waktu mengikuti ketentuan Dinas Kependudukan dan Catatan Sipil (Dukcapil). Silakan konfirmasi ke Kantor Desa untuk informasi terbaru.</span>
+            </div>
+
+            <div class="bantuan-box">
+                <h3><i class="fas fa-headset"></i> Butuh Bantuan Pengurusan Pernikahan?</h3>
+                <p>Hubungi kami langsung, atau isi formulir di bawah ini dan kami akan menghubungkan Anda melalui WhatsApp atau Email.</p>
+
+                <div class="kontak-cepat">
+                    <a href="https://wa.me/628562927006?text=Pernikahan" class="btn-wa" target="_blank">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="mailto:desakaligayamwediklaten@gmail.com?subject=Layanan%20Informasi%20-%20Pernikahan" class="btn-email">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                </div>
+
+                <form class="layanan-form" onsubmit="kirimLayanan(event, this, 'Pernikahan')">
+                    <div class="form-row">
+                        <input type="text" name="nama" placeholder="Nama Lengkap" required>
+                        <input type="text" name="kontak" placeholder="No. WhatsApp / Email" required>
+                    </div>
+                    <textarea name="pesan" placeholder="Tuliskan kendala atau pertanyaan Anda (opsional)" rows="3"></textarea>
+                    <div class="form-row">
+                        <select name="metode">
+                            <option value="wa">Hubungi via WhatsApp</option>
+                            <option value="email">Hubungi via Email</option>
+                        </select>
+                        <button type="submit" class="btn-primary-form"><i class="fas fa-paper-plane"></i> Kirim & Hubungi</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+
+        <div class="footer-content">
+
+            <h3>Desa Kaligayam</h3>
+
+            <p>
+                Website resmi desa sebagai sarana informasi,
+                komunikasi, dan pelayanan masyarakat.
+            </p>
+
+            <div class="social">
+                <a href="https://www.tiktok.com/@kaligayam.official" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.instagram.com/desa_kaligayam" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+            </div>
+
+            <p>
+                © KKN UPNYK 2026
+            </p>
+
+        </div>
+
+    </footer>
+
+    <script>
+    function kirimLayanan(event, form, docName) {
+        event.preventDefault();
+
+        const nama = form.nama.value.trim();
+        const kontak = form.kontak.value.trim();
+        const pesan = form.pesan.value.trim();
+        const metode = form.metode.value;
+
+        if (!nama || !kontak) {
+            alert('Mohon lengkapi nama dan kontak Anda terlebih dahulu.');
+            return;
+        }
+
+        const isiPesan = 'Halo Admin Desa Kaligayam, saya ' + nama + ' (kontak: ' + kontak +
+            ') ingin bertanya mengenai layanan ' + docName + '.' +
+            (pesan ? ('\n\nPesan: ' + pesan) : '');
+
+        if (metode === 'wa') {
+            const nomorWA = '628562927006';
+            window.open('https://wa.me/' + nomorWA + '?text=' + encodeURIComponent(isiPesan), '_blank');
+        } else {
+            const email = 'desakaligayamwediklaten@gmail.com';
+            window.location.href = 'mailto:' + email +
+                '?subject=' + encodeURIComponent('Layanan Informasi - ' + docName) +
+                '&body=' + encodeURIComponent(isiPesan);
+        }
+
+        form.reset();
+    }
+    </script>
+
+
+<script src="index.js"></script>
+
+</body>
+</html>

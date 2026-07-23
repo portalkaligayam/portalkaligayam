@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="id" style="scroll-behavior: smooth;">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infografis Penduduk - Desa Kaligayam</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+<style>
+
+/* ========================= RESET & BASE (sama seperti web utama) ========================= */
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background:#f5f7fa;color:#333;line-height:1.6;}
+a{text-decoration:none;}
+ul{list-style:none;}
+img{max-width:100%;display:block;}
+.container{width:90%;max-width:1200px;margin:auto;}
+section{padding:70px 0;}
+.section-title{text-align:center;margin-bottom:40px;}
+.section-title h2{font-size:2.2rem;color:#0d47a1;position:relative;}
+.section-title p{color:#666;max-width:700px;margin:12px auto 0;}
+.section-title h2::after{content:'';width:80px;height:4px;background:#0d6efd;display:block;margin:10px auto;border-radius:20px;}
+
+/* ========================= NAVBAR ========================= */
+.navbar{position:fixed;top:0;left:0;width:100%;padding:15px 8%;background:#0d6efd;display:flex;justify-content:space-between;align-items:center;z-index:1000;box-shadow:0 3px 15px rgba(0,0,0,0.15);}
+.logo{display:flex;align-items:center;gap:10px;}
+.logo img{width:45px;height:45px;border-radius:50%;}
+.logo span{color:white;font-size:1.2rem;font-weight:700;}
+.nav-menu{display:flex;gap:25px;}
+.nav-menu a{color:white;font-weight:500;transition:0.3s;}
+.nav-menu a:hover{color:#ffd54f;}
+.nav-menu a.active{color:#ffd54f;}
+.dropdown{position:relative;}
+.dropdown-menu{position:absolute;top:100%;left:0;min-width:220px;background:#fff;border-radius:8px;box-shadow:0 5px 15px rgba(0,0,0,0.15);display:none;z-index:999;}
+.dropdown-menu li a{display:block;padding:12px 15px;color:#333;transition:0.3s;}
+.dropdown-menu li a:hover{background:#0d6efd;color:#fff;}
+.dropdown:hover .dropdown-menu{display:block;}
+.dropdown-head{display:flex;align-items:center;justify-content:center;gap:6px;}
+.dropdown-toggle{cursor:pointer;display:inline-flex;align-items:center;justify-content:center;color:white;font-size:12px;padding:4px 8px;}
+.dropdown-toggle i{transition:0.3s;}
+.dropdown.show .dropdown-toggle i{transform:rotate(180deg);}
+.dropdown.show .dropdown-menu{display:block;}
+.hamburger{display:none;color:white;font-size:1.5rem;cursor:pointer;}
+
+/* ========================= HERO ========================= */
+.hero-infografis{
+    padding-top:150px;
+    padding-bottom:60px;
+    background:linear-gradient(135deg,#0d47a1,#0d6efd);
+    color:#fff;
+    text-align:center;
+}
+.hero-infografis h1{font-size:2.6rem;margin-bottom:15px;}
+.hero-infografis p{max-width:750px;margin:auto;color:rgba(255,255,255,.9);font-size:1.05rem;}
+.tab-nav{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:30px;}
+.tab-nav a{background:rgba(255,255,255,.15);color:#fff;padding:8px 20px;border-radius:30px;font-weight:500;font-size:.9rem;transition:.3s;border:1px solid rgba(255,255,255,.3);}
+.tab-nav a.active,.tab-nav a:hover{background:#ffc107;color:#333;border-color:#ffc107;}
+
+/* ========================= STAT CARDS ========================= */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.card{background:white;padding:28px 20px;border-radius:15px;text-align:center;box-shadow:0 5px 15px rgba(0,0,0,.08);border-bottom:4px solid #0d6efd;}
+.card i{font-size:2.2rem;color:#0d6efd;margin-bottom:12px;}
+.card h3{color:#0d47a1;font-size:2rem;margin-bottom:5px;}
+.card p{color:#666;font-weight:500;}
+
+/* ========================= CHART CARD WRAPPER ========================= */
+.chart-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:25px;align-items:stretch;}
+.chart-grid.single{grid-template-columns:1fr;}
+.chart-card{background:#fff;border-radius:18px;box-shadow:0 5px 20px rgba(0,0,0,.08);padding:28px;}
+.chart-card h3{color:#0d47a1;font-size:1.15rem;margin-bottom:20px;text-align:center;}
+.chart-wrap{position:relative;height:320px;}
+.chart-wrap.small{height:280px;}
+
+.legend-list{list-style:none;margin-top:18px;}
+.legend-list li{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px dashed #eee;font-size:.92rem;}
+.legend-list li:last-child{border-bottom:none;}
+.legend-dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px;}
+.legend-name{display:flex;align-items:center;color:#444;}
+.legend-value{font-weight:700;color:#0d47a1;}
+
+/* ========================= TABLE ========================= */
+.data-table{width:100%;border-collapse:collapse;background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 5px 15px rgba(0,0,0,.08);}
+.data-table th{background:#0d47a1;color:#fff;text-align:left;padding:14px 18px;font-weight:600;}
+.data-table td{padding:13px 18px;border-bottom:1px solid #f0f0f0;color:#444;}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:nth-child(even){background:#f9fbff;}
+
+/* ========================= NOTE BOX ========================= */
+.note-box{
+    background:#fff8e1;
+    border:1px solid #ffe082;
+    color:#7a5c00;
+    padding:14px 20px;
+    border-radius:12px;
+    font-size:.9rem;
+    margin-bottom:30px;
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+}
+.note-box i{color:#f9a825;margin-top:2px;}
+
+/* ========================= FOOTER ========================= */
+footer{background:#0b1f44;color:white;text-align:center;padding:50px 20px;}
+.footer-content h3{margin-bottom:15px;}
+.footer-content p{margin-bottom:15px;}
+.social{margin:20px 0;}
+.social a{color:white;font-size:1.5rem;margin:0 10px;transition:0.3s;}
+.social a:hover{color:#ffc107;}
+
+/* ========================= RESPONSIVE ========================= */
+@media(max-width:900px){
+    .chart-grid{grid-template-columns:1fr;}
+}
+@media(max-width:768px){
+    .stats{grid-template-columns:1fr 1fr;}
+    .hero-infografis h1{font-size:1.9rem;}
+    .nav-menu{
+        display:none;
+        flex-direction:column;
+        position:absolute;
+        top:75px;
+        left:0;
+        width:100%;
+        background:#0d6efd;
+        padding:20px;
+        text-align:center;
+    }
+    .nav-menu.active{display:flex;}
+    .hamburger{display:block;}
+    .dropdown:hover .dropdown-menu{display:none;}
+    .dropdown-menu{position:static;width:100%;margin-top:10px;box-shadow:none;}
+    .dropdown.show .dropdown-menu{display:block;}
+}
+
+</style>
+</head>
+<body>
+
+<header>
+<nav class="navbar">
+
+    <div class="logo">
+        <img src="./logo.png" alt="Logo Desa">
+        <span>KALIGAYAM</span>
+    </div>
+
+    <ul class="nav-menu">
+
+        <li><a href="index.html">Beranda</a></li>
+
+        <li><a href="profil-desa.html">Profil Desa</a></li>
+
+        <li><a href="infografis.html" class="active">Infografis</a></li>
+
+        <!-- MENU LAYANAN INFORMASI -->
+        <li class="dropdown">
+
+            <div class="dropdown-head">
+                <a href="layanan-informasi.html">Layanan Informasi</a>
+                <span class="dropdown-toggle"><i class="fas fa-chevron-down"></i></span>
+            </div>
+
+            <ul class="dropdown-menu">
+                <li><a href="layanan-informasi.html#kk">Kartu Keluarga</a></li>
+                <li><a href="layanan-informasi.html#ktp">KTP</a></li>
+                <li><a href="layanan-informasi.html#kia">KIA</a></li>
+                <li><a href="layanan-informasi.html#akta-kematian">Akta Kematian</a></li>
+                <li><a href="layanan-informasi.html#akta-lahir">Akta Lahir</a></li>
+                <li><a href="layanan-informasi.html#akta-cerai">Akta Cerai</a></li>
+                <li><a href="layanan-informasi.html#pernikahan">Pernikahan</a></li>
+            </ul>
+
+        </li>
+
+        <li><a href="berita.html">Berita</a></li>
+
+        <li><a href="index.html#contact">Kontak</a></li>
+
+    </ul>
+
+    <div class="hamburger">
+        <i class="fas fa-bars"></i>
+    </div>
+
+</nav>
+    </header>
+
+<!-- HERO -->
+<section class="hero-infografis">
+    <div class="container">
+        <h1>Infografis Kependudukan</h1>
+        <p>
+            Informasi demografi penduduk Desa Kaligayam: jumlah penduduk, kepala keluarga,
+            kelompok umur, sebaran dusun, pendidikan, pekerjaan, status perkawinan, dan agama.
+        </p>
+        <div class="tab-nav">
+            <a href="#umur" class="active">Kelompok Umur</a>
+            <a href="#dusun">Dusun</a>
+            <a href="#pendidikan">Pendidikan & Perkawinan</a>
+            <a href="#pekerjaan">Pekerjaan</a>
+            <a href="#agama">Agama</a>
+        </div>
+    </div>
+</section>
+
+<!-- STAT CARDS -->
+<section>
+    <div class="container">
+
+
+        <div class="stats">
+            <div class="card">
+                <i class="fas fa-users"></i>
+                <h3 id="totalPenduduk">0</h3>
+                <p>Total Penduduk</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-house"></i>
+                <h3 id="totalKK">0</h3>
+                <p>Kepala Keluarga</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-mars"></i>
+                <h3 id="totalLaki">0</h3>
+                <p>Laki-laki</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-venus"></i>
+                <h3 id="totalPerempuan">0</h3>
+                <p>Perempuan</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- KELOMPOK UMUR -->
+<section id="umur" style="padding-top:0;">
+    <div class="container">
+        <div class="section-title">
+            <h2>Berdasarkan Kelompok Umur</h2>
+            <p>Distribusi penduduk berdasarkan rentang usia.</p>
+        </div>
+
+        <div class="chart-grid single">
+            <div class="chart-card">
+                <h3>Jumlah Penduduk per Kelompok Umur (Laki-laki &amp; Perempuan)</h3>
+                <div class="chart-wrap">
+                    <canvas id="chartUmurLP"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- BERDASARKAN DUSUN -->
+<section id="dusun" style="padding-top:0;">
+    <div class="container">
+        <div class="section-title">
+            <h2>Berdasarkan Dusun</h2>
+            <p>Sebaran jumlah penduduk pada tiap dusun di Desa Kaligayam.</p>
+        </div>
+
+        <div class="chart-grid">
+            <div class="chart-card">
+                <h3>Jumlah Penduduk per Dusun</h3>
+                <div class="chart-wrap">
+                    <canvas id="chartDusun"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3>Keterangan</h3>
+                <ul class="legend-list" id="legendDusun"></ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PENDIDIKAN & PERKAWINAN -->
+<section id="pendidikan" style="padding-top:0;">
+    <div class="container">
+        <div class="section-title">
+            <h2>Berdasarkan Pendidikan &amp; Perkawinan</h2>
+            <p>Tingkat pendidikan terakhir dan status perkawinan penduduk.</p>
+        </div>
+
+        <div class="chart-grid">
+            <div class="chart-card">
+                <h3>Berdasarkan Pendidikan</h3>
+                <div class="chart-wrap" style="height:400px;">
+                    <canvas id="chartPendidikan"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3>Berdasarkan Status Perkawinan</h3>
+                <div class="chart-wrap" style="height:400px;">
+                    <canvas id="chartKawin"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PEKERJAAN -->
+<section id="pekerjaan" style="padding-top:0;">
+    <div class="container">
+        <div class="section-title">
+            <h2>Berdasarkan Pekerjaan</h2>
+            <p>Jenis pekerjaan atau mata pencaharian penduduk.</p>
+        </div>
+
+        <div class="chart-grid single">
+            <div class="chart-card">
+                <h3>Jumlah Penduduk per Jenis Pekerjaan (Laki-laki &amp; Perempuan)</h3>
+                <div class="chart-wrap" style="height:820px;">
+                    <canvas id="chartPekerjaan"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- AGAMA -->
+<section id="agama" style="padding-top:0;">
+    <div class="container">
+        <div class="section-title">
+            <h2>Berdasarkan Agama</h2>
+            <p>Komposisi penduduk menurut agama yang dianut.</p>
+        </div>
+
+        <div class="chart-grid">
+            <div class="chart-card">
+                <h3>Grafik Agama</h3>
+                <div class="chart-wrap small">
+                    <canvas id="chartAgama"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3>Keterangan</h3>
+                <ul class="legend-list" id="legendAgama"></ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+
+    <div class="footer-content">
+
+        <h3>Desa Kaligayam</h3>
+
+        <p>
+            Website resmi desa sebagai sarana informasi,
+            komunikasi, dan pelayanan masyarakat.
+        </p>
+
+        <div class="social">
+            <a href="https://www.tiktok.com/@kaligayam.official" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.instagram.com/desa_kaligayam" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+        </div>
+
+        <p>
+            © KKN UPNYK 2026
+        </p>
+
+    </div>
+
+</footer>
+
+<script>
+/* =========================================================
+   SUMBER DATA — ganti angka di bawah ini dengan data asli
+   ========================================================= */
+const data = {
+    totalPenduduk: 3.537,
+    totalKK: 350,
+    laki: 1.819,
+    perempuan: 1.718,
+
+    umur: {
+        labels: ["0-4","5-9","10-14","15-19","20-24","25-29","30-39","40-49","50-59","60+"],
+        laki: [70,132,160,135,124,145,293,261,211,288],
+        perempuan: [123,133,133,104,119,134,257,231,208,276],
+        values: [193,265,293,239,243,279,550,492,419,564]
+    },
+
+    dusun: {
+        labels: ["Mindi","Kaponan","Ngemplak","Bakalan","Bantengan","Karangmunggur","Kaligayam"],
+        values: [280,240,260,230,240,220,200],
+        colors: ["#0d6efd","#198754","#ffc107","#dc3545","#6f42c1","#20c997","#fd7e14"]
+    },
+
+    pendidikan: {
+        labels: ["Tidak/Belum Sekolah","Belum Tamat SD/Sederajat","Tamat SD/Sederajat","SLTP/Sederajat","SLTA/Sederajat","Diploma I/II","Akademi/Diploma III/S. Muda","Diploma IV/Strata I","Strata II","Strata III"],
+        laki: [263,244,472,314,495,2,11,17,1,0],
+        perempuan: [302,247,462,265,401,1,12,28,0,0],
+        values: [565,491,934,579,896,3,23,45,1,0]
+    },
+
+    kawin: {
+        labels: ["L Belum Kawin","P Belum Kawin","L Kawin","P Kawin","L Cerai Hidup","P Cerai Hidup","L Cerai Mati","P Cerai Mati"],
+        values: [836,607,879,873,45,55,59,183],
+        colors: ["#0d6efd","#dc3545","#198754","#20c997","#ffc107","#fd7e14","#6f42c1","#adb5bd"]
+    },
+
+    pekerjaan: {
+        labels: ["Belum/Tidak Bekerja","Mengurus Rumah Tangga","Pelajar/Mahasiswa","Pensiunan","Pegawai Negeri Sipil (PNS)","Tentara Nasional Indonesia (TNI)","Kepolisian RI (POLRI)","Perdagangan","Petani/Pekebun","Karyawan Swasta","Karyawan BUMN","Karyawan Honorer","Buruh Harian Lepas","Buruh Tani/Perkebunan","Buruh Nelayan/Perikanan","Tukang Jahit","Guru","Bidan","Perawat","Sopir","Pedagang","Perangkat Desa","Kepala Desa","Wiraswasta","Anggota Lembaga Tinggi Lainnya"],
+        laki: [269,0,397,5,5,1,2,1,4,47,1,2,1028,10,1,0,1,0,0,2,9,5,1,24,3],
+        perempuan: [308,150,325,1,7,0,0,2,1,30,0,0,839,17,0,1,5,1,1,0,0,8,3,10,10],
+        values: [577,150,722,6,12,1,2,3,5,77,1,2,1867,27,1,1,6,1,1,2,9,13,4,34,13]
+    },
+
+    agama: {
+        labels: ["Islam","Kristen","Katolik","Hindu","Budha","Lainnya"],
+        values: [3529,0,8,0,0,0],
+        colors: ["#0d6efd","#198754","#ffc107","#dc3545","#6f42c1","#adb5bd"]
+    }
+};
+
+document.getElementById("totalPenduduk").textContent = data.totalPenduduk.toLocaleString("id-ID");
+document.getElementById("totalKK").textContent = data.totalKK.toLocaleString("id-ID");
+document.getElementById("totalLaki").textContent = data.laki.toLocaleString("id-ID");
+document.getElementById("totalPerempuan").textContent = data.perempuan.toLocaleString("id-ID");
+
+Chart.defaults.font.family = "Segoe UI, Tahoma, Geneva, Verdana, sans-serif";
+
+/* --- Kelompok Umur: L vs P (bar berkelompok) --- */
+new Chart(document.getElementById("chartUmurLP"), {
+    type: "bar",
+    data: {
+        labels: data.umur.labels,
+        datasets: [
+            { label: "Laki-laki", data: data.umur.laki, backgroundColor: "#0d6efd", borderRadius: 6, maxBarThickness: 28 },
+            { label: "Perempuan", data: data.umur.perempuan, backgroundColor: "#dc3545", borderRadius: 6, maxBarThickness: 28 }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { position: "bottom" } },
+        scales: { y: { beginAtZero: true, grid: { color: "#f0f0f0" } }, x: { grid: { display: false } } }
+    }
+});
+
+/* --- Dusun (doughnut) --- */
+new Chart(document.getElementById("chartDusun"), {
+    type: "doughnut",
+    data: {
+        labels: data.dusun.labels,
+        datasets: [{ data: data.dusun.values, backgroundColor: data.dusun.colors, borderWidth: 2, borderColor: "#fff" }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: "bottom" } } }
+});
+
+const legendDusun = document.getElementById("legendDusun");
+data.dusun.labels.forEach((label, i) => {
+    legendDusun.innerHTML += `<li><span class="legend-name"><span class="legend-dot" style="background:${data.dusun.colors[i]}"></span>${label}</span><span class="legend-value">${data.dusun.values[i]} jiwa</span></li>`;
+});
+
+/* --- Pendidikan (bar horizontal) --- */
+new Chart(document.getElementById("chartPendidikan"), {
+    type: "bar",
+    data: {
+        labels: data.pendidikan.labels,
+        datasets: [
+            { label: "Laki-laki", data: data.pendidikan.laki, backgroundColor: "#0d6efd", borderRadius: 6, maxBarThickness: 18 },
+            { label: "Perempuan", data: data.pendidikan.perempuan, backgroundColor: "#dc3545", borderRadius: 6, maxBarThickness: 18 }
+        ]
+    },
+    options: {
+        indexAxis: "y",
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { position: "bottom" } },
+        scales: { x: { beginAtZero: true, grid: { color: "#f0f0f0" } }, y: { grid: { display: false } } }
+    }
+});
+
+/* --- Perkawinan (doughnut) --- */
+new Chart(document.getElementById("chartKawin"), {
+    type: "doughnut",
+    data: {
+        labels: data.kawin.labels,
+        datasets: [{ data: data.kawin.values, backgroundColor: data.kawin.colors, borderWidth: 2, borderColor: "#fff" }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: "bottom" } } }
+});
+
+/* --- Pekerjaan (bar horizontal berkelompok) --- */
+new Chart(document.getElementById("chartPekerjaan"), {
+    type: "bar",
+    data: {
+        labels: data.pekerjaan.labels,
+        datasets: [
+            { label: "Laki-laki", data: data.pekerjaan.laki, backgroundColor: "#0d6efd", borderRadius: 6, maxBarThickness: 16 },
+            { label: "Perempuan", data: data.pekerjaan.perempuan, backgroundColor: "#dc3545", borderRadius: 6, maxBarThickness: 16 }
+        ]
+    },
+    options: {
+        indexAxis: "y",
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { position: "bottom" } },
+        scales: { x: { beginAtZero: true, grid: { color: "#f0f0f0" } }, y: { grid: { display: false } } }
+    }
+});
+
+/* --- Agama (doughnut) --- */
+new Chart(document.getElementById("chartAgama"), {
+    type: "doughnut",
+    data: {
+        labels: data.agama.labels,
+        datasets: [{ data: data.agama.values, backgroundColor: data.agama.colors, borderWidth: 2, borderColor: "#fff" }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+});
+
+const legendAgama = document.getElementById("legendAgama");
+data.agama.labels.forEach((label, i) => {
+    legendAgama.innerHTML += `<li><span class="legend-name"><span class="legend-dot" style="background:${data.agama.colors[i]}"></span>${label}</span><span class="legend-value">${data.agama.values[i]} jiwa</span></li>`;
+});
+</script>
+
+
+<script src="index.js"></script>
+
+</body>
+</html>
